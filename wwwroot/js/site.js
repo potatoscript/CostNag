@@ -3,8 +3,8 @@
  * 
  * 2. Client.BaseAddress in Helper.cs
  *******/
-//var _url = "/";          //if your app upload outside Default Web site - for my pc
-var _url = "/costnag/";  //if your app upload under Default Web site - for company
+var _url = "/";          //if your app upload outside Default Web site - for my pc
+//var _url = "/costnag/";  //if your app upload under Default Web site - for company
 var _url2 = "/costdata/";  //if your app upload under Default Web site - for company
 
 
@@ -30,6 +30,10 @@ jQuery(document).ready(function () {
             })
  
 
+    jQuery("#btn_searchcode").click(function () {
+        window.location.href = _url + "Home/Index?" +
+            "search_code=" + document.getElementById("search_code").value;
+    });
 
 });
 

@@ -15,16 +15,19 @@ namespace CostNag.Controllers
 
         CostAPI _api = new CostAPI();
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search_code)
         {
-
 
             Cost list = new Cost();
             List<Cost> cost_ = new List<Cost>();
 
             HttpClient clientdata = _api.Initial();
 
-            HttpResponseMessage resdata = await clientdata.GetAsync("api/data/get-all-costs");
+            var action = "api/data/get-all-costs";
+            if (search_code!=null)
+                action = "api/data/get-cost-by-search/" + search_code;
+
+            HttpResponseMessage resdata = await clientdata.GetAsync(action);
 
             resdata.EnsureSuccessStatusCode();
 
