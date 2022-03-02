@@ -7,12 +7,12 @@ using CostNag.Helper;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using System;
 
 namespace CostNag.Controllers
 {
     public class HomeController : Controller
     {
-
         CostAPI _api = new CostAPI();
 
         public async Task<IActionResult> Index(string? search_code)
@@ -23,9 +23,9 @@ namespace CostNag.Controllers
 
             HttpClient clientdata = _api.Initial();
 
-            var action = "api/data/get-all-costs";
+            var action = "api/cost/get-all-costs";
             if (search_code!=null)
-                action = "api/data/get-cost-by-search/" + search_code;
+                action = "api/cost/get-cost-by-search/" + search_code;
 
             HttpResponseMessage resdata = await clientdata.GetAsync(action);
 
@@ -61,6 +61,7 @@ namespace CostNag.Controllers
             return View();
         }
 
+
         public async void Delete(
            Cost model,
            bool confirm,
@@ -77,7 +78,7 @@ namespace CostNag.Controllers
                 {
                     HttpClient client = _api.Initial();
                     var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                    var action = "api/data/delete-cost-by-id/" + Id;
+                    var action = "api/cost/delete-cost-by-id/" + Id;
                     HttpResponseMessage res = await client.PostAsync(action, content).ConfigureAwait(false);
                     res.EnsureSuccessStatusCode();
                     if (res.IsSuccessStatusCode)

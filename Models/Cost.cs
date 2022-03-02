@@ -32,6 +32,22 @@ namespace CostNag.Models
 
 
 
+        ///<summary>
+        /// Gets or sets Costs.
+        ///</summary>
+        public List<Cost> CostData { get; set; }
+
+        ///<summary>
+        /// Gets or sets CurrentPageIndex.
+        ///</summary>
+        public int CurrentPageIndex { get; set; }
+
+        ///<summary>
+        /// Gets or sets PageCount.
+        ///</summary>
+        public int PageCount { get; set; }
+
+
     }
 }
 
