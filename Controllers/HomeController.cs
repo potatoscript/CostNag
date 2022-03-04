@@ -23,7 +23,8 @@ namespace CostNag.Controllers
 
             HttpClient clientdata = _api.Initial();
 
-            var action = "api/cost/get-all-costs";
+           // var action = "api/cost/get-all-costs";
+            var action = "api/cost/get-cost-by-page/"+1;
             if (search_code!=null)
                 action = "api/cost/get-cost-by-search/" + search_code;
 
@@ -31,11 +32,20 @@ namespace CostNag.Controllers
 
             resdata.EnsureSuccessStatusCode();
 
+            ViewBag.PageCount = 1;
+            ViewBag.CurrentPageIndex = 1;
+
+            ViewBag.first = 1;
+            ViewBag.last = 10;
+
+
             if (resdata.IsSuccessStatusCode)
             {
                 var resultdata = resdata.Content.ReadAsStringAsync().Result;
                 cost_ = JsonConvert.DeserializeObject<List<Cost>>(resultdata);
 
+                ViewBag.PageCount = cost_[0].PageCount;
+                ViewBag.CurrentPageIndex = cost_[0].CurrentPageIndex;
 
                 foreach (var o in cost_)
                 {
@@ -61,6 +71,59 @@ namespace CostNag.Controllers
             return View();
         }
 
+
+        public async Task<IActionResult> IndexPage(int CurrentPage, int first, int last)
+        {
+
+            Cost list = new Cost();
+            List<Cost> cost_ = new List<Cost>();
+
+            HttpClient clientdata = _api.Initial();
+
+            var action = "api/cost/get-cost-by-page/" + CurrentPage;
+
+            HttpResponseMessage resdata = await clientdata.GetAsync(action);
+
+            resdata.EnsureSuccessStatusCode();
+
+            ViewBag.PageCount = 1;
+            ViewBag.CurrentPageIndex = 1;
+
+            ViewBag.first = first;
+            ViewBag.last = last;
+
+
+            if (resdata.IsSuccessStatusCode)
+            {
+                var resultdata = resdata.Content.ReadAsStringAsync().Result;
+                cost_ = JsonConvert.DeserializeObject<List<Cost>>(resultdata);
+
+                ViewBag.PageCount = cost_[0].PageCount;
+                ViewBag.CurrentPageIndex = cost_[0].CurrentPageIndex;
+
+                foreach (var o in cost_)
+                {
+                    list.data.Add(new Cost
+                    {
+                        doc_no = o.doc_no,
+                        wr_no = o.wr_no,
+                        sales = o.sales,
+                        parts_code = o.parts_code,
+                        product = o.product,
+                        issue_date = o.issue_date,
+                        expired_by = o.expired_by,
+                        approved_by = o.approved_by,
+                        CostId = o.CostId
+
+                    });
+                }
+
+            }
+            List<Cost> model = list.data.ToList();
+            ViewData["data"] = model;
+
+            return View("Index");
+        }
 
         public async void Delete(
            Cost model,

@@ -82,6 +82,12 @@ function setWindow() {
 
 }
 
+
+function PageClick(page, first, last) {
+    var url = _url + "Home/IndexPage?CurrentPage="+page+"&&first="+first+"&&last="+last;
+    window.location.href = url;
+}
+
 function delete_data(id) {
     
     var confirm_delete = confirm("Delete Data?");
