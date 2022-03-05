@@ -24,6 +24,16 @@ button {
     border-radius: 8px;
 }
 
+.next {
+    border: 1px solid black;
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    font-weight:bold;
+    border-radius: 8px;
+    background:lightblue;
+}
+
 #div_body{
     overflow:auto;
 }

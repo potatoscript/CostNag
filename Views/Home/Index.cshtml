@@ -57,7 +57,7 @@
                 @if (ViewBag.first > 10)
                 {
                     <td style="padding-left:5px;">
-                        <button onclick="PageClick(@ViewBag.first-10,@ViewBag.first-10,@ViewBag.last-10);">＜</button>
+                        <button class="next" onclick="PageClick(@ViewBag.first-10,@ViewBag.first-10,@ViewBag.last-10);">&#60&#60</button>
                     </td>
                 }
                 @for (int i = 1; i <= ViewBag.PageCount; i++)
@@ -79,8 +79,8 @@
                 }
                 @if (ViewBag.PageCount >= ViewBag.first+10)
                 {
-                    <td style="padding-left:5px;">
-                        <button onclick="PageClick(@ViewBag.first+10,@ViewBag.first+10,@ViewBag.last+10);">＞</button>
+                    <td  style="padding-left:5px;">
+                        <button class="next" onclick="PageClick(@ViewBag.first+10,@ViewBag.first+10,@ViewBag.last+10);">&#62&#62</button>
                     </td>
                 }
             </tr>

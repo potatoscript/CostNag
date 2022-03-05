@@ -41,29 +41,33 @@ namespace CostNag.Controllers
 
             if (resdata.IsSuccessStatusCode)
             {
-                var resultdata = resdata.Content.ReadAsStringAsync().Result;
-                cost_ = JsonConvert.DeserializeObject<List<Cost>>(resultdata);
-
-                ViewBag.PageCount = cost_[0].PageCount;
-                ViewBag.CurrentPageIndex = cost_[0].CurrentPageIndex;
-
-                foreach (var o in cost_)
+                // use try catch to prevent zero data error of out of Index range
+                try
                 {
-                    list.data.Add(new Cost
+                    var resultdata = resdata.Content.ReadAsStringAsync().Result;
+                    cost_ = JsonConvert.DeserializeObject<List<Cost>>(resultdata);
+
+                    ViewBag.PageCount = cost_[0].PageCount;
+                    ViewBag.CurrentPageIndex = cost_[0].CurrentPageIndex;
+
+                    foreach (var o in cost_)
                     {
-                        doc_no = o.doc_no,
-                        wr_no = o.wr_no,
-                        sales = o.sales,
-                        parts_code = o.parts_code,
-                        product = o.product,
-                        issue_date = o.issue_date,
-                        expired_by = o.expired_by,
-                        approved_by = o.approved_by,
-                        CostId = o.CostId
+                        list.data.Add(new Cost
+                        {
+                            doc_no = o.doc_no,
+                            wr_no = o.wr_no,
+                            sales = o.sales,
+                            parts_code = o.parts_code,
+                            product = o.product,
+                            issue_date = o.issue_date,
+                            expired_by = o.expired_by,
+                            approved_by = o.approved_by,
+                            CostId = o.CostId
 
-                    });
+                        });
+                    }
                 }
-
+                catch(Exception msg) { }
             }
             List<Cost> model = list.data.ToList();
             ViewData["data"] = model;
