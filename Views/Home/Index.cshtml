@@ -63,7 +63,6 @@
 
                 <!--use ni++ to get the last page with one data -->
                 @{var ni = ViewBag.PageCount; }
-                @if (ni > 1) ni++;
                 
                 @for (int i = 1; i <= ni; i++)
                 {
@@ -82,7 +81,7 @@
                     }
 
                 }
-                @if (ViewBag.PageCount >= ViewBag.first + 10)
+                @if (ViewBag.PageCount >= ViewBag.first + 9)
                 {
                     <td style="padding-left:5px;">
                         <button class="next" onclick="PageClick(@ViewBag.first+10,@ViewBag.first+10,@ViewBag.last+10);">&#62&#62</button>
