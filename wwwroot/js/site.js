@@ -4,7 +4,7 @@
  * 2. Client.BaseAddress in Helper.cs
  *******/
 var _url = "/";          //if your app upload outside Default Web site - for my pc
-//var _url = "/costnag/";  //if your app upload under Default Web site - for company
+ _url = "/costnag/";  //if your app upload under Default Web site - for company
 var _url2 = "/costdata/";  //if your app upload under Default Web site - for company
 
 
@@ -24,8 +24,8 @@ jQuery(document).ready(function () {
                 var table = document.getElementById("table_data");
 
                 //window.location.href = _url + "Home/Read?id=" + table.rows[RI].cells[9].innerText;
-                if(CI!=10)
-                window.open(_url2 + "Home/Read?id=" + table.rows[RI].cells[9].innerText, '_blank');
+                if(CI!=12)//dont trigger the detail data when click on delete button
+                window.open(_url2 + "Home/Read?id=" + table.rows[RI].cells[11].innerText, '_blank');
 
             })
  

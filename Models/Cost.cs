@@ -30,7 +30,8 @@ namespace CostNag.Models
 
         public List<Cost> data = new List<Cost>();
 
-
+        public double target_price_sgd { get; set; }
+        public double tooling_list_total_amount_sgd { get; set; }
 
         ///<summary>
         /// Gets or sets Costs.

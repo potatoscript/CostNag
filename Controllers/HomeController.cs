@@ -62,6 +62,8 @@ namespace CostNag.Controllers
                             issue_date = o.issue_date,
                             expired_by = o.expired_by,
                             approved_by = o.approved_by,
+                            target_price_sgd = o.target_price_sgd,
+                            tooling_list_total_amount_sgd = o.tooling_list_total_amount_sgd,
                             CostId = o.CostId
 
                         });
@@ -117,6 +119,8 @@ namespace CostNag.Controllers
                         issue_date = o.issue_date,
                         expired_by = o.expired_by,
                         approved_by = o.approved_by,
+                        target_price_sgd = o.target_price_sgd,
+                        tooling_list_total_amount_sgd = o.tooling_list_total_amount_sgd,
                         CostId = o.CostId
 
                     });
